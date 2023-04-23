@@ -1,0 +1,25 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block title %} Convert your Images to text for free! {% endblock title %} {% block content %}
+<h2>Hello There!</h2>
+
+{% if data %} {% for data in data %}
+<p>{{data.title}}</p>
+<img src="{% static data.file.url %}" alt="NO IMAGE" />
+
+{% autoescape off %}
+<p>{{ data.document_text }}</p>
+{% endautoescape %}
+
+<button><a href="{% url 'ocr:edit' data.id %}">Edit</a></button>
+<button>
+    <a href="{% url 'ocr:delete' data.id %}">Delete this content</a>
+</button>
+{% endfor %} {% else %}
+<p>Your workspace is empty!</p>
+
+{% endif %}
+
+<p><a href="{% url 'ocr:upload' %}">Create new</a></p>
+
+{% endblock %}

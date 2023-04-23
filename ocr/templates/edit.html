@@ -1,0 +1,16 @@
+{% extends "base.html" %} {% block title %} Edit You Work {% endblock title %}
+{% block content %}
+
+<h3>Edit your work</h3>
+<form action="" method="POST">
+    {% csrf_token %} {{form.as_p}}
+    <input type="submit" value="Save" />
+</form>
+
+<button><a href="{% url 'ocr:convert' item.id %}">Download as pdf.</a></button>
+<!-- <button>Save to the database.</button> -->
+<button>
+    <a href="{% url 'ocr:delete' item.id %}">Delete this content</a>
+</button>
+
+{% endblock content %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %} {% block title %} Edit You Work {% endblock title %}
+{% block content %}
+
+<h3>Delete the content</h3>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <p>Are you sure you want to delete this content?</p>
+    <button type="submit">Yes. Delete</button>
+    <button><a href="{{ request.META.HTTP_REFERER }}">No. Go back</a></button> 
+    
+</form>
+
+
+
+{% endblock content %}
