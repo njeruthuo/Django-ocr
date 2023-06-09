@@ -1,9 +1,15 @@
-{% extends 'base.html' %} 
-{% block content %}
-<h2>Upload a document</h2>
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %} 
-    {{ form.as_p }}
-    <button type="submit">Upload</button>
+{% extends 'base.html' %} {% block content %}
+<h2 class="upload">Upload a document</h2>
+<form method="post" enctype="multipart/form-data" class="my-form">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="{{ form.title.id_for_label }}">Title:</label>
+        {{ form.title }}
+    </div>
+    <div class="form-group">
+        <label for="{{ form.file.id_for_label }}">File:</label>
+        {{ form.file }}
+    </div>
+    <button type="submit" class="btn btn-primary">Upload</button>
 </form>
 {% endblock %}

@@ -1,25 +1,59 @@
-{% extends 'base.html' %} 
-{% load static %} 
-{% block title %} Convert your Images to text for free! {% endblock title %} {% block content %}
-<h2>Hello There!</h2>
+{% extends 'base.html' %} {% block title %} Convert your Images to text for
+free! {% endblock title %} {% block content %}
 
-{% if data %} {% for data in data %}
-<p>{{data.title}}</p>
-<img src="{% static data.file.url %}" alt="NO IMAGE" />
-
-{% autoescape off %}
-<p>{{ data.document_text }}</p>
-{% endautoescape %}
-
-<button><a href="{% url 'ocr:edit' data.id %}">Edit</a></button>
-<button>
-    <a href="{% url 'ocr:delete' data.id %}">Delete this content</a>
-</button>
-{% endfor %} {% else %}
-<p>Your workspace is empty!</p>
-
+{% if messages %}
+<div class="upload" id="messages">
+    {% for message in messages %}
+    <p>{{message}}</p>
+    {% endfor %}
+</div>
 {% endif %}
+<div style="display: flex; flex-direction: row" class="contain-content">
+    <h2 style="margin-top: 0; flex: 1" class="hello">
+        Hello {{request.user}}!
+    </h2>
+    <p
+        style="margin-top: 0; width: 5%; margin-right: 1.5rem; margin-top: 0"
+        class="logout-button"
+    >
+        <a href="{% url 'user:logout' %}">Logout</a>
+    </p>
+</div>
 
-<p><a href="{% url 'ocr:upload' %}">Create new</a></p>
+{% if not data %}
+<p class="empty-workspace">Your workspace is empty!</p>
+{% endif %}
+<div>
+    <p class="create-button">
+        <a href="{% url 'ocr:upload' %}">Create a new document</a>
+    </p>
+</div>
 
+<div class="container">
+    {% for data in data %}
+    <div class="data">
+        <p class="title">{{data.title}}</p>
+        <div class="image">
+            <img src="{{ data.file.url }}" alt="NO IMAGE" />
+        </div>
+
+        <!-- {% autoescape off %} -->
+        <p class="document-text">{{ data.document_text }}</p>
+        <!-- {% endautoescape %} -->
+        <div class="buttons">
+            <button class="edit-button">
+                <a href="{% url 'ocr:edit' data.id %}">Edit</a>
+            </button>
+            <button class="delete-button">
+                <a href="{% url 'ocr:generate-pdf' data.id %}"
+                    >Download as PDF</a
+                >
+            </button>
+            <button class="delete-button">
+                <a href="{% url 'ocr:delete' data.id %}">Delete this content</a>
+            </button>
+        </div>
+    </div>
+    {% endfor %}
+</div>
 {% endblock %}

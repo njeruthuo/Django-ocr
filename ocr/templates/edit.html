@@ -1,16 +1,24 @@
 {% extends "base.html" %} {% block title %} Edit You Work {% endblock title %}
 {% block content %}
+<div class="edit">
+    <h3 class="edit-heading">Edit your work</h3>
+    <form action="" method="POST" class="edit-form">
+        <img src="{{item.file.url}}" alt="" />
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="Save" class="save-button" />
 
-<h3>Edit your work</h3>
-<form action="" method="POST">
-    {% csrf_token %} {{form.as_p}}
-    <input type="submit" value="Save" />
-</form>
+        <div class="buttons">
+            <button class="pdf-download-button">
+                <a href="{% url 'ocr:generate-pdf' item.id %}"
+                    >Download as PDF</a
+                >
+            </button>
 
-<button><a href="{% url 'ocr:convert' item.id %}">Download as pdf.</a></button>
-<!-- <button>Save to the database.</button> -->
-<button>
-    <a href="{% url 'ocr:delete' item.id %}">Delete this content</a>
-</button>
-
+            <button class="delete-button delete">
+                <a href="{% url 'ocr:delete' item.id %}">Delete this content</a>
+            </button>
+        </div>
+    </form>
+</div>
 {% endblock content %}

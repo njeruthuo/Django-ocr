@@ -11,4 +11,7 @@ class DocumentForm(forms.ModelForm):
 class DocumentEditForm(forms.ModelForm):
     class Meta:
         model = Document
-        fields = ('title', 'file', 'document_text')
+        fields = ('title', 'document_text')
+        widgets = {
+            'document_text': forms.Textarea(attrs={'style': 'width: 100%; height:50%;'}),
+        }

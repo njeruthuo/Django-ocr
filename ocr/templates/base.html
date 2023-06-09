@@ -1,16 +1,161 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}
-      
-    {% endblock title %}</title>
-</head>
-<body>
-    {% block content %}
-      
-    {% endblock content %}
-</body>
+    <head>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{% block title %} {% endblock title %}</title>
+        <style>
+            body{
+                margin: 0;
+            }
+            .home-class{
+                min-height: 700px;
+                background: #f0ebeb;
+                border: 0.3px solid rgb(185, 177, 177);
+                padding: 1rem;
+                margin-top: 1rem;
+                margin-bottom: 3rem;
+                border-radius: 10px;
+            }
+            img {
+                object-fit: cover;
+                width: 100%;
+            }
+
+            .delete {
+                padding: 10px;
+                color: white;
+                border: none;
+                background: rgb(167, 7, 7);
+                border-radius: 4px;
+            }
+
+            .delete * {
+                color: white;
+            }
+
+            .my-form button .delete {
+                padding: 10px;
+                color: white;
+                border: none;
+                background: rgb(167, 7, 7);
+                border-radius: 4px;
+            }
+            .upload {
+                margin-top: 3rem;
+                text-align: center;
+            }
+
+            /* Style for the form container */
+            .my-form {
+                max-width: 800px;
+                border: 1px solid lightgray;
+                padding: 2rem;
+                margin: 0 auto;
+            }
+
+            /* Style for form labels */
+            .my-form label {
+                display: block;
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+
+            /* Style for form input fields */
+            .my-form input[type="text"],
+            .my-form input[type="file"] {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+                margin-bottom: 10px;
+            }
+
+            /* Style for the submit button */
+            .my-form button[type="submit"] {
+                background-color: #4caf50;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+
+            .my-form button[type="submit"]:hover {
+                background-color: #45a049;
+            }
+
+            /* Optional: Style for form error messages */
+            .my-form .error-message {
+                color: red;
+                font-size: 14px;
+                margin-top: 5px;
+            }
+
+            @media (max-width: 768px) {
+                .data {
+                    flex-basis: calc(
+                        50% - 1rem
+                    ); /* Adjust the width as needed */
+                }
+
+                .logout-button {
+                    position: absolute;
+                    font-size: 2vw;
+                    right: 18px;
+                    top: 0;
+                }
+
+                .hello {
+                    font-size: 2.5vw;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .data {
+                    flex-basis: 100%; /* Display cards in a single column */
+                }
+
+                .hello {
+                    font-size: 3.5vw;
+                }
+
+                .logout-button {
+                    position: absolute;
+                    font-size: 2vw;
+                    right: 18px;
+                    top: 0;
+                }
+            }
+        </style>
+        <script>
+            // Wait for the DOM to load
+            document.addEventListener("DOMContentLoaded", function () {
+                // Get the messages container element
+                var messagesContainer = document.getElementById("messages");
+
+                // Check if the messages container exists
+                if (messagesContainer) {
+                    // Display the messages
+                    messagesContainer.style.display = "block";
+
+                    // Hide the messages after 2 seconds
+                    setTimeout(function () {
+                        messagesContainer.style.display = "none";
+                    }, 1000);
+                }
+            });
+        </script>
+    </head>
+    <body>
+        <section style="background-color: #ccc; margin: 0; padding: 2rem;">
+            <h1 style="text-align: center;">TO-PDF CONVERT</h1>
+            <p style="text-align: center; margin-top: 0; font-style: oblique;">Your one stop solution for your OCR problems.</p>
+        </section>
+        <div class="home-class">{% block content %} {% endblock content %}</div>
+    </body>
 </html>

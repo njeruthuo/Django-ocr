@@ -1,8 +1,6 @@
-from django.urls import path
 from . import views
+from django.urls import path
 
-from django.conf import settings
-from django.conf.urls.static import static
 
 app_name = 'ocr'
 urlpatterns = [
@@ -10,10 +8,5 @@ urlpatterns = [
     path('upload/', views.upload_document, name='upload'),
     path('edit/<int:pk>/', views.edit, name='edit'),
     path('delete/<int:pk>/', views.delete_content, name='delete'),
-    path('convert-pdf/<int:pk>/', views.convert_to_pdf, name='convert'),
+    path('generate-pdf/<int:id>/', views.generate_pdf, name='generate-pdf'),
 ]
-
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL,
-                          document_root=settings.MEDIA_ROOT)
